@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.tasky.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_updateDailyTaskFragment"
+            app:destination="@id/updateDailyTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.tasky.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.tasky.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/addDailyTaskFragment"
+        android:name="com.example.tasky.screen.AddDailyTaskFragment"
+        android:label="fragment_add_daily_task"
+        tools:layout="@layout/fragment_add_daily_task" />
+    <fragment
+        android:id="@+id/detailDailyTaskFragment"
+        android:name="com.example.tasky.screen.DetailDailyTaskFragment"
+        android:label="fragment_detail_daily_task"
+        tools:layout="@layout/fragment_detail_daily_task" />
+    <fragment
+        android:id="@+id/updateDailyTaskFragment"
+        android:name="com.example.tasky.screen.UpdateDailyTaskFragment"
+        android:label="fragment_update_daily_task"
+        tools:layout="@layout/fragment_update_daily_task">
+<!--        <argument-->
+<!--            android:name="data"-->
+<!--            app:argType="com.example.tasky.model.DailyTask"/>-->
+
+
+        <argument
+            android:name="data"
+            app:argType="com.example.tasky.model.DailyTask" />
+    </fragment>
+</navigation>

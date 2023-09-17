@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screen.UpdateDailyTaskFragment"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/edittitle_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:maxLines="1"
+        android:background="@drawable/edt_txt_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:textColorHint="@color/white"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/editsubtitle_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subtitle"
+        android:maxLines="1"
+        android:background="@drawable/edt_txt_shape"
+        app:layout_constraintTop_toBottomOf="@id/edittitle_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:textColorHint="@color/white"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/editnote_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Notes"
+        android:background="@drawable/edt_txt_shape"
+        app:layout_constraintTop_toBottomOf="@id/editsubtitle_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:textColorHint="@color/white"
+        android:padding="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_editsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="96dp"
+        android:src="@drawable/baseline_check_24"
+        android:visibility="visible"
+        android:clickable="true"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
