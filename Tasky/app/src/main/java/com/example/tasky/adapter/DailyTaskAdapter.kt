@@ -29,12 +29,12 @@ class DailyTaskAdapter(val requireContext: Context, val dailyTaskList: List<Dail
 
     override fun onBindViewHolder(holder: dailyViewHolder, position: Int) {
         val data = dailyTaskList[position]
-        holder.binding.noteTxt.text = data.note
-        holder.binding.titleTxt.text = data.title
-        holder.binding.dateTxt.text = data.date
+        holder.binding.txtNote.text = data.note
+        holder.binding.txtTitle.text = data.title
+        holder.binding.txtDate.text = data.date
 
         holder.binding.root.setOnClickListener{
-            val action = HomeFragmentDirections.actionNavigationHomeToUpdateDailyTaskFragment(data)
+            val action = HomeFragmentDirections.actionNavigationHomeToDetailDailyTaskFragment(data)
            Navigation.findNavController(it).navigate(action)
 
         }

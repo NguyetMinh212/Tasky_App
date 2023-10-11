@@ -2,12 +2,12 @@ package com.example.tasky.screen
 
 import android.os.Bundle
 import android.text.format.DateFormat
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -39,7 +39,6 @@ class UpdateDailyTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.edittitleTxt.setText(notes.data.title)
-        binding.editsubtitleTxt.setText(notes.data.subtitle)
         binding.editnoteTxt.setText(notes.data.note)
 
         binding.btnEditsave.setOnClickListener{
@@ -78,7 +77,6 @@ class UpdateDailyTaskFragment : Fragment() {
         val dailyTask = DailyTask(
             notes.data.id,
             title = title,
-            subtitle = subtitle,
             category = category,
             note = note,
             date = timeCreate.toString()

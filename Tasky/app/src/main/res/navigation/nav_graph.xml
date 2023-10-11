@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_updateDailyTaskFragment"
             app:destination="@id/updateDailyTaskFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailDailyTaskFragment"
+            app:destination="@id/detailDailyTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_calendar"
@@ -33,7 +36,11 @@
         android:id="@+id/detailDailyTaskFragment"
         android:name="com.example.tasky.screen.DetailDailyTaskFragment"
         android:label="fragment_detail_daily_task"
-        tools:layout="@layout/fragment_detail_daily_task" />
+        tools:layout="@layout/fragment_detail_daily_task" >
+        <argument
+            android:name="data"
+            app:argType="com.example.tasky.model.DailyTask" />
+    </fragment>
     <fragment
         android:id="@+id/updateDailyTaskFragment"
         android:name="com.example.tasky.screen.UpdateDailyTaskFragment"
