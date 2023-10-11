@@ -150,6 +150,23 @@
         android:textAlignment="center"
         android:gravity="center"/>
 
+    <TextView
+        android:id="@+id/edit_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/finished_btn"
+        app:layout_constraintTop_toBottomOf="@id/delete_btn"
+        app:layout_constraintEnd_toEndOf="@+id/finished_btn"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/delete_shape"
+        android:text="@string/edit_task"
+        android:textSize="20sp"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center"
+        />
+
 
 
 

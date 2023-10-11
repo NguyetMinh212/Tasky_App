@@ -1,11 +1,11 @@
 package com.example.tasky.screen
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +15,8 @@ import com.example.tasky.R
 import com.example.tasky.databinding.FragmentUpdateDailyTaskBinding
 import com.example.tasky.model.DailyTask
 import com.example.tasky.viewmodel.DailyTaskViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 
@@ -26,7 +27,12 @@ class UpdateDailyTaskFragment : Fragment() {
 
     val notes by navArgs<UpdateDailyTaskFragmentArgs>()
     val viewModel: DailyTaskViewModel by viewModels()
-    private var category = "1"
+
+    private var start_hour: Long = 0
+    private var start_min: Long = 0
+    private var end_hour: Long = 0
+    private var end_min: Long = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -38,38 +44,78 @@ class UpdateDailyTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.edittitleTxt.setText(notes.data.title)
-        binding.editnoteTxt.setText(notes.data.note)
+        binding.titleTxt.setText(notes.data.title)
+        binding.descriptionTxt.setText(notes.data.note)
+        if(notes.data.category== "1"){
+            binding.dailyTask.setBackgroundResource(R.drawable.btn_chosen_shape)
+            binding.dailyTask.setTextColor(resources.getColor(R.color.white))
+            binding.priorityTask.setBackgroundResource(R.drawable.edt_txt_shape)
+            binding.priorityTask.setTextColor(resources.getColor(R.color.blue))
+        }else{
+            binding.priorityTask.setBackgroundResource(R.drawable.btn_chosen_shape)
+            binding.priorityTask.setTextColor(resources.getColor(R.color.white))
+            binding.dailyTask.setBackgroundResource(R.drawable.edt_txt_shape)
+            binding.dailyTask.setTextColor(resources.getColor(R.color.blue))
+        }
 
-        binding.btnEditsave.setOnClickListener{
+        binding.end.text = notes.data.timeEnd
+        binding.start.text = notes.data.timeStart
+
+        val fm = SimpleDateFormat("HH:mm")
+        val timeStart = fm.parse(notes.data.timeStart)
+        val timeEnd = fm.parse(notes.data.timeEnd)
+        start_hour = timeStart.hours.toLong()
+        start_min = timeStart.minutes.toLong()
+        end_hour = timeEnd.hours.toLong()
+        end_min = timeEnd.minutes.toLong()
+
+        binding.start.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+            val timePickerDialog = TimePickerDialog(context, TimePickerDialog.OnTimeSetListener{ view, hourOfDay, minute ->
+                val c = Calendar.getInstance()
+                c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                c.set(Calendar.MINUTE, minute)
+                val format = SimpleDateFormat("HH:mm")
+                val time: String = format.format(c.time)
+                start_hour = hourOfDay.toLong()
+                start_min = minute.toLong()
+                if(validateTime()) binding.start.text = time
+            }, hour, minute, DateFormat.is24HourFormat(context))
+            timePickerDialog.show()
+        }
+
+        binding.end.setOnClickListener{
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+            val timePickerDialog = TimePickerDialog(context, TimePickerDialog.OnTimeSetListener{ view, hourOfDay, minute ->
+                val c = Calendar.getInstance()
+                c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                c.set(Calendar.MINUTE, minute)
+                val format = SimpleDateFormat("HH:mm")
+                val time: String = format.format(c.time)
+                end_hour = hourOfDay.toLong()
+                end_min = minute.toLong()
+                if(validateTime()) binding.end.text = time
+            }, hour, minute, DateFormat.is24HourFormat(context))
+            timePickerDialog.show()
+        }
+
+
+        binding.btnSave.setOnClickListener{
             updateNotes(it)
         }
 
-        binding.btnDelete.setOnClickListener {
-            val bottomSheet: BottomSheetDialog = BottomSheetDialog(requireContext(),R.style.BottomSheetStyle)
-            bottomSheet.setContentView(R.layout.dialog_delete)
-            bottomSheet.show()
 
-            val textViewYes = bottomSheet.findViewById<TextView>(R.id.dialog_yes)
-            val textViewNo = bottomSheet.findViewById<TextView>(R.id.dialog_no)
-
-            textViewYes?.setOnClickListener{
-                viewModel.delete(notes.data.id!!)
-                bottomSheet.dismiss()
-                findNavController().navigate(R.id.navigation_home)
-            }
-
-            textViewNo?.setOnClickListener{
-                bottomSheet.dismiss()
-            }
-        }
     }
 
     private fun updateNotes(it: View?) {
-        val title = binding.edittitleTxt.text.toString()
-        val subtitle = binding.editsubtitleTxt.text.toString()
-        val note = binding.editnoteTxt.text.toString()
-
+        val title = binding.titleTxt.text.toString()
+        val note = binding.descriptionTxt.text.toString()
+        val timeStart = binding.start.text.toString()
+        val timeEnd = binding.end.text.toString()
         //get current time
         val d = Date()
         val timeCreate: CharSequence = DateFormat.format("MMMM d, yyyy ", d.time)
@@ -77,8 +123,10 @@ class UpdateDailyTaskFragment : Fragment() {
         val dailyTask = DailyTask(
             notes.data.id,
             title = title,
-            category = category,
+            category = notes.data.category,
             note = note,
+            timeStart = timeStart,
+            timeEnd = timeEnd,
             date = timeCreate.toString()
         )
         viewModel.update(dailyTask)
@@ -86,6 +134,24 @@ class UpdateDailyTaskFragment : Fragment() {
         findNavController().navigate(R.id.navigation_home)
 
 
+    }
+
+    private fun validateTime(): Boolean {
+        val start = binding.start.text.toString()
+        val end = binding.end.text.toString()
+        if (start.isEmpty() || end.isEmpty()) {
+            Toast.makeText(context, "Please fill the time", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        else if (start_hour > end_hour || (start_hour == end_hour && start_min > end_min - 5)) {
+            Toast.makeText(context, "Time for task is at least 5 minutes", Toast.LENGTH_SHORT)
+                .show()
+            end_hour = start_hour
+            end_min = start_min + 5
+            return false
+        }
+        return true
     }
 
 

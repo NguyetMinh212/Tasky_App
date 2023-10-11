@@ -32,7 +32,6 @@ class AddDailyTaskFragment : Fragment() {
     private var end_hour: Long = 0
     private var end_min: Long = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -80,7 +79,7 @@ class AddDailyTaskFragment : Fragment() {
                 c.set(Calendar.MINUTE, minute)
                 val format = SimpleDateFormat("HH:mm")
                 val time: String = format.format(c.time)
-                start_hour = hour.toLong()
+                start_hour = hourOfDay.toLong()
                 start_min = minute.toLong()
                 if(validateTime()) binding.start.text = time
             }, hour, minute, DateFormat.is24HourFormat(context))
@@ -97,7 +96,7 @@ class AddDailyTaskFragment : Fragment() {
                 c.set(Calendar.MINUTE, minute)
                 val format = SimpleDateFormat("HH:mm")
                 val time: String = format.format(c.time)
-                end_hour = hour.toLong()
+                end_hour = hourOfDay.toLong()
                 end_min = minute.toLong()
                 if(validateTime()) binding.end.text = time
             }, hour, minute, DateFormat.is24HourFormat(context))
@@ -141,6 +140,8 @@ class AddDailyTaskFragment : Fragment() {
     private fun createDailyTask(it: View?) {
         val title = binding.titleTxt.text.toString()
         val note = binding.descriptionTxt.text.toString()
+        val timeStart = binding.timeStart.text.toString()
+        val timeEnd = binding.timeEnd.text.toString()
 
         //get current time
         val d = Date()
@@ -151,6 +152,8 @@ class AddDailyTaskFragment : Fragment() {
             title = title,
             category = category,
             note = note,
+            timeStart = timeStart,
+            timeEnd = timeEnd,
             date = timeCreate.toString()
         )
         viewModel.insert(dailyTask)

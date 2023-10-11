@@ -1,6 +1,5 @@
 package com.example.tasky.model
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
@@ -12,6 +11,8 @@ data class DailyTask(
     var title: String,
     var category: String,
     var note: String,
+    var timeStart: String,
+    var timeEnd: String,
     var date: String,
 
 ): Serializable

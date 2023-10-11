@@ -37,6 +37,8 @@ class DetailDailyTaskFragment : Fragment() {
         binding.titleTv.text = notes.data.title
         binding.note.text = notes.data.note
         binding.date.text = notes.data.date
+        binding.start.text = notes.data.timeStart
+        binding.end.text = notes.data.timeEnd
 
 
         binding.deleteBtn.setOnClickListener {
@@ -56,6 +58,10 @@ class DetailDailyTaskFragment : Fragment() {
             textViewNo?.setOnClickListener{
                 bottomSheet.dismiss()
             }
+        }
+
+        binding.editBtn.setOnClickListener {
+           findNavController().navigate(R.id.updateDailyTaskFragment)
         }
     }
 

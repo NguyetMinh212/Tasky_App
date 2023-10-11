@@ -40,6 +40,9 @@
         <argument
             android:name="data"
             app:argType="com.example.tasky.model.DailyTask" />
+        <action
+            android:id="@+id/action_detailDailyTaskFragment_to_updateDailyTaskFragment"
+            app:destination="@id/updateDailyTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateDailyTaskFragment"
