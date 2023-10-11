@@ -129,6 +129,7 @@ class UpdateDailyTaskFragment : Fragment() {
             note = note,
             timeStart = timeStart,
             timeEnd = timeEnd,
+            ischecked = notes.data.ischecked,
             date = timeCreate.toString()
         )
         viewModel.update(dailyTask)

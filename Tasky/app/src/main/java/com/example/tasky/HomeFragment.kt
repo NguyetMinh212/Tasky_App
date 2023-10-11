@@ -39,7 +39,9 @@ class HomeFragment : Fragment() {
             binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             binding.recyclerView.adapter = DailyTaskAdapter(requireContext(), dailyTaskList)
 
+
         })
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
 }

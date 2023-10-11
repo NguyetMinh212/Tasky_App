@@ -154,6 +154,7 @@ class AddDailyTaskFragment : Fragment() {
             note = note,
             timeStart = timeStart,
             timeEnd = timeEnd,
+            ischecked = false,
             date = timeCreate.toString()
         )
         viewModel.insert(dailyTask)

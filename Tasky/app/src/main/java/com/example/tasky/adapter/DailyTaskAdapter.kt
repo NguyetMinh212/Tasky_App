@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.HomeFragmentDirections
-import com.example.tasky.R
 import com.example.tasky.databinding.DailyRowBinding
 import com.example.tasky.model.DailyTask
 
@@ -32,6 +31,21 @@ class DailyTaskAdapter(val requireContext: Context, val dailyTaskList: List<Dail
         holder.binding.txtNote.text = data.note
         holder.binding.txtTitle.text = data.title
         holder.binding.txtDate.text = data.date
+        if(data.ischecked){
+            holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_selected)
+        } else{
+            holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_unselected)
+        }
+
+        holder.binding.checkbox.setOnClickListener {
+            if(data.ischecked){
+                data.ischecked = false
+                holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_unselected)
+            } else{
+                data.ischecked = true
+                holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_selected)
+            }
+        }
 
         holder.binding.root.setOnClickListener{
             val action = HomeFragmentDirections.actionNavigationHomeToDetailDailyTaskFragment(data)

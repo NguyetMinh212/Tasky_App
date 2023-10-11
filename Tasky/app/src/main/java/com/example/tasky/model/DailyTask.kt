@@ -13,6 +13,7 @@ data class DailyTask(
     var note: String,
     var timeStart: String,
     var timeEnd: String,
+    var ischecked: Boolean,
     var date: String,
 
 ): Serializable
