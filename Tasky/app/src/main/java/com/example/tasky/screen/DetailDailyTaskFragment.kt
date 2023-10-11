@@ -42,26 +42,31 @@ class DetailDailyTaskFragment : Fragment() {
 
 
         binding.deleteBtn.setOnClickListener {
-            val bottomSheet: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetStyle)
+            val bottomSheet: BottomSheetDialog =
+                BottomSheetDialog(requireContext(), R.style.BottomSheetStyle)
             bottomSheet.setContentView(R.layout.dialog_delete)
             bottomSheet.show()
 
             val textViewYes = bottomSheet.findViewById<TextView>(R.id.dialog_yes)
             val textViewNo = bottomSheet.findViewById<TextView>(R.id.dialog_no)
 
-            textViewYes?.setOnClickListener{
+            textViewYes?.setOnClickListener {
                 viewModel.delete(notes.data.id!!)
                 bottomSheet.dismiss()
                 findNavController().navigate(R.id.navigation_home)
             }
 
-            textViewNo?.setOnClickListener{
+            textViewNo?.setOnClickListener {
                 bottomSheet.dismiss()
             }
         }
 
         binding.editBtn.setOnClickListener {
-           findNavController().navigate(R.id.updateDailyTaskFragment)
+            val action =
+                DetailDailyTaskFragmentDirections.actionDetailDailyTaskFragmentToUpdateDailyTaskFragment(
+                    notes.data
+                )
+            findNavController().navigate(action)
         }
     }
 

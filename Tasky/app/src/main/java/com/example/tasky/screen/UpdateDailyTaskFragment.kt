@@ -1,8 +1,10 @@
 package com.example.tasky.screen
 
 import android.app.TimePickerDialog
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,6 @@ import com.example.tasky.R
 import com.example.tasky.databinding.FragmentUpdateDailyTaskBinding
 import com.example.tasky.model.DailyTask
 import com.example.tasky.viewmodel.DailyTaskViewModel
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
@@ -44,6 +45,7 @@ class UpdateDailyTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("@@", "onViewCreated: ${notes.data.title}")
         binding.titleTxt.setText(notes.data.title)
         binding.descriptionTxt.setText(notes.data.note)
         if(notes.data.category== "1"){

@@ -140,8 +140,8 @@ class AddDailyTaskFragment : Fragment() {
     private fun createDailyTask(it: View?) {
         val title = binding.titleTxt.text.toString()
         val note = binding.descriptionTxt.text.toString()
-        val timeStart = binding.timeStart.text.toString()
-        val timeEnd = binding.timeEnd.text.toString()
+        val timeStart = binding.start.text.toString()
+        val timeEnd = binding.end.text.toString()
 
         //get current time
         val d = Date()
