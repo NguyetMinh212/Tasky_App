@@ -16,4 +16,6 @@ class DailyTaskRepository(private val dailyTaskDao: DailyTaskDao) {
     }
 
     fun getAllDailyTasks():LiveData<List<DailyTask>> = dailyTaskDao.getAllDailyTasks()
+
+    fun calendarSearch(searchQuery: String) : LiveData<List<DailyTask>> = dailyTaskDao.calendarSearch(searchQuery)
 }

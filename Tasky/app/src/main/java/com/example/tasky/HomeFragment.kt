@@ -44,4 +44,6 @@ class HomeFragment : Fragment() {
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
+
+
 }

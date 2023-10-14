@@ -45,4 +45,6 @@ class DailyTaskViewModel(application: Application): AndroidViewModel(application
         }
     }
 
+    fun calendarSearch(searchQuery: String) : LiveData<List<DailyTask>> = repository.calendarSearch(searchQuery)
+
 }

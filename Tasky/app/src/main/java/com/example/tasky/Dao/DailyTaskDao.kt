@@ -2,7 +2,6 @@ package com.example.tasky.Dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -26,4 +25,7 @@ interface DailyTaskDao {
 
     @Query("SELECT * FROM dailyTask_table")
     fun getAllDailyTasks(): LiveData<List<DailyTask>>
+
+    @Query("SELECT * FROM dailyTask_table WHERE date LIKE :searchQuery")
+    fun calendarSearch(searchQuery: String) : LiveData<List<DailyTask>>
 }
