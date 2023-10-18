@@ -11,7 +11,7 @@ import com.example.tasky.model.PriorityTask
 @Dao
 interface PriorityTaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(priorityTask: PriorityTask)
+    suspend fun insert(priorityTask: PriorityTask): Long
 
     @Query("DELETE FROM priorityTask_table WHERE idTask=:idTask")
     suspend fun delete(idTask: Int)

@@ -14,7 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.tasky.R
 import com.example.tasky.databinding.FragmentAddDailyTaskBinding
 import com.example.tasky.model.DailyTask
+import com.example.tasky.model.PriorityTask
+import com.example.tasky.model.SubTask
 import com.example.tasky.viewmodel.DailyTaskViewModel
+import com.example.tasky.viewmodel.PriorityTaskViewModel
+import com.example.tasky.viewmodel.SubTaskViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -28,6 +32,8 @@ class AddDailyTaskFragment : Fragment() {
 
     private var category = "1"
     private val viewModel: DailyTaskViewModel by viewModels()
+    private val viewModelPriority: PriorityTaskViewModel by viewModels()
+    private val viewModelSubTask: SubTaskViewModel by viewModels()
 
     private var start_hour: Long = 0
     private var start_min: Long = 0
@@ -36,6 +42,9 @@ class AddDailyTaskFragment : Fragment() {
 
     private lateinit var startDate: Calendar
     private lateinit var endDate: Calendar
+
+    private val subTaskList = mutableListOf<SubTask>()
+    private var idTask = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +58,15 @@ class AddDailyTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSave.setOnClickListener {
-            createDailyTask(it)
+            if (category == "1") {
+                if (validateTime()) {
+                    createDailyTask(it)
+                }
+            } else if (category == "2") {
+                if (validateDate()) {
+                    createPriorityTask(it)
+                }
+            }
         }
         category = "1"
         binding.dailyTask.setBackgroundResource(R.drawable.btn_chosen_shape)
@@ -77,6 +94,7 @@ class AddDailyTaskFragment : Fragment() {
         }
     }
 
+
     private fun validateTime(): Boolean {
         val start = binding.start.text.toString()
         val end = binding.end.text.toString()
@@ -93,7 +111,7 @@ class AddDailyTaskFragment : Fragment() {
         return true
     }
 
-    private fun validateDate():Boolean{
+    private fun validateDate(): Boolean {
         val start = binding.start.text.toString()
         val end = binding.end.text.toString()
         if (start.isEmpty() || end.isEmpty()) {
@@ -129,6 +147,29 @@ class AddDailyTaskFragment : Fragment() {
         )
         viewModel.insert(dailyTask)
         Toast.makeText(context, "Notes Created Successfully", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.navigation_home)
+    }
+
+    private fun createPriorityTask(it: View?) {
+        val title = binding.titleTxt.text.toString()
+        val note = binding.descriptionTxt.text.toString()
+        val timeStart = binding.start.text.toString()
+        val timeEnd = binding.end.text.toString()
+
+        //get current time
+        val d = Date()
+        val timeCreate: CharSequence = DateFormat.format("MMMM d, yyyy ", d.time)
+
+        val priorityTask = PriorityTask(
+            title = title,
+            category = category,
+            description = note,
+            timeStart = timeStart,
+            timeEnd = timeEnd,
+            dayCreated = timeCreate.toString()
+        )
+        viewModelPriority.insert(priorityTask)
+        Toast.makeText(context, "Priority Task Created Successfully", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.navigation_home)
     }
 
@@ -208,8 +249,8 @@ class AddDailyTaskFragment : Fragment() {
         binding.recyclerView.visibility = View.VISIBLE
         binding.addSubtask.visibility = View.VISIBLE
 
-        val startDate = Calendar.getInstance()
-        val endDate = Calendar.getInstance()
+        startDate = Calendar.getInstance()
+        endDate = Calendar.getInstance()
         // Set the start date as the current date
         startDate.timeInMillis = System.currentTimeMillis()
 
@@ -221,7 +262,7 @@ class AddDailyTaskFragment : Fragment() {
         val formattedStartDate = dateFormat.format(startDate.time)
         binding.start.text = formattedStartDate
         val formattedEndDate = dateFormat.format(endDate.time)
-        binding.end.text =  formattedEndDate
+        binding.end.text = formattedEndDate
 
         binding.start.setOnClickListener {
             val datePicker = DatePickerDialog(
@@ -232,7 +273,7 @@ class AddDailyTaskFragment : Fragment() {
                     startDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                     val dateFormat = SimpleDateFormat("MMMM d, yyyy", Locale.getDefault())
                     val formattedDate = dateFormat.format(startDate.time)
-                    if(validateDate())binding.start.text = formattedDate
+                    if (validateDate()) binding.start.text = formattedDate
                 },
                 startDate.get(Calendar.YEAR),
                 startDate.get(Calendar.MONTH),
@@ -251,7 +292,7 @@ class AddDailyTaskFragment : Fragment() {
                     endDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                     val dateFormat = SimpleDateFormat("MMMM d, yyyy", Locale.getDefault())
                     val formattedDate = dateFormat.format(endDate.time)
-                    if(validateDate())binding.end.text = formattedDate
+                    if (validateDate()) binding.end.text = formattedDate
                 },
                 endDate.get(Calendar.YEAR),
                 endDate.get(Calendar.MONTH),
@@ -261,6 +302,20 @@ class AddDailyTaskFragment : Fragment() {
             datePicker.show()
         }
 
+        binding.addSubtask.setOnClickListener {
+            val subtitle = binding.subtitletxt.text.toString()
+            if (subtitle.isNotEmpty()) {
+                val subTask = SubTask(
+                    title = subtitle,
+                    idTask = idTask,
+                    isDone = false
+                )
+                subTaskList.add(subTask)
+                Toast.makeText(context, "Subtask added successfully!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Please fill the subtitle", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 

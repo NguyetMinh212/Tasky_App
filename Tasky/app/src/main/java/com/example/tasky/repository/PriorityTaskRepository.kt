@@ -6,7 +6,7 @@ import com.example.tasky.model.PriorityTask
 
 class PriorityTaskRepository(private val priorityTaskDao: PriorityTaskDao) {
 
-    suspend fun insert(priorityTask:PriorityTask) = priorityTaskDao.insert(priorityTask)
+    suspend fun insert(priorityTask:PriorityTask):Long = priorityTaskDao.insert(priorityTask)
 
     suspend fun updateData(priorityTask: PriorityTask) = priorityTaskDao.update(priorityTask)
 

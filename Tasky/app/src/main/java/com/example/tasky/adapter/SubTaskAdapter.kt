@@ -2,7 +2,6 @@ package com.example.tasky.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.databinding.SubtaskBinding
@@ -11,7 +10,7 @@ import com.example.tasky.model.SubTask
 class SubTaskAdapter(
     val requireContext: Context,
     val subTaskList: List<SubTask>,
-    val onItemClick: (view: View, data: SubTask) -> Unit,
+
 ) : RecyclerView.Adapter<SubTaskAdapter.SubTaskViewHolder>() {
 
     inner class SubTaskViewHolder(val binding: SubtaskBinding) :
@@ -50,9 +49,9 @@ class SubTaskAdapter(
                 holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.active)
             }
         }
-        holder.binding.root.setOnClickListener {
-            onItemClick(it, data)
-        }
+//        holder.binding.root.setOnClickListener {
+//            onItemClick(it, data)
+//        }
     }
 
 

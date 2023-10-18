@@ -7,7 +7,7 @@ import java.io.Serializable
 @Entity(tableName = "subTask_table")
 data class SubTask(
     @PrimaryKey(autoGenerate = true)
-    var idSubTask: Int?=null,
+    var idSubTask: Int=0,
     var title: String,
     var isDone: Boolean,
     var idTask: Int

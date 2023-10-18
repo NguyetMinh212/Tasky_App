@@ -21,10 +21,11 @@ class PriorityTaskViewModel(application: Application): AndroidViewModel(applicat
         getAllPriorityTasks = repository.getAllPriorityTask()
     }
 
-    fun insert(priorityTask: PriorityTask){
+    fun insert(priorityTask: PriorityTask):Long{
         viewModelScope.launch(Dispatchers.IO) {
             repository.insert(priorityTask)
         }
+
     }
 
     fun delete(idTask: Int){
