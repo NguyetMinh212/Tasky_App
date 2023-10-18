@@ -16,4 +16,6 @@
     <string name="delete_task">Delete Task</string>
     <string name="edit_task">Edit Task</string>
     <string name="unfinished">Unfinished</string>
+    <string name="to_do_list">To do List</string>
+    <string name="subtitle">Subtitle</string>
 </resources>

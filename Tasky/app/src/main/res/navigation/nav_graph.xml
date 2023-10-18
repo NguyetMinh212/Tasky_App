@@ -16,12 +16,19 @@
         <action
             android:id="@+id/action_navigation_home_to_detailDailyTaskFragment"
             app:destination="@id/detailDailyTaskFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailPriorityTaskFragment"
+            app:destination="@id/detailPriorityTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_calendar"
         android:name="com.example.tasky.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_navigation_calendar_to_detailDailyTaskFragment"
+            app:destination="@id/detailDailyTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.tasky.ProfileFragment"
@@ -57,5 +64,14 @@
         <argument
             android:name="data"
             app:argType="com.example.tasky.model.DailyTask" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPriorityTaskFragment"
+        android:name="com.example.tasky.screen.DetailPriorityTaskFragment"
+        android:label="fragment_detail_priority_task"
+        tools:layout="@layout/fragment_detail_priority_task" >
+        <argument
+            android:name="data"
+            app:argType="com.example.tasky.model.PriorityTask" />
     </fragment>
 </navigation>
