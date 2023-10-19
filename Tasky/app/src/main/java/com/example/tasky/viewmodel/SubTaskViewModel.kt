@@ -44,4 +44,6 @@ class SubTaskViewModel(application: Application): AndroidViewModel(application) 
         }
     }
     fun getAllSubTaskFromPriorityTask(idTask: Int) : LiveData<List<SubTask>> = repository.getAllSubTasksFromPriorityTask(idTask)
+
+
 }

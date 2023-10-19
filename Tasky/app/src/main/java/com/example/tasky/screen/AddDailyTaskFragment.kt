@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.R
+import com.example.tasky.adapter.SubTaskAdapter
 import com.example.tasky.databinding.FragmentAddDailyTaskBinding
 import com.example.tasky.model.DailyTask
 import com.example.tasky.model.PriorityTask
@@ -59,9 +61,9 @@ class AddDailyTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSave.setOnClickListener {
             if (category == "1") {
-                if (validateTime()) {
+
                     createDailyTask(it)
-                }
+
             } else if (category == "2") {
                 if (validateDate()) {
                     createPriorityTask(it)
@@ -169,6 +171,7 @@ class AddDailyTaskFragment : Fragment() {
             dayCreated = timeCreate.toString()
         )
         viewModelPriority.insert(priorityTask)
+        viewModelPriority.savePriorityTask(priorityTask, subTaskList)
         Toast.makeText(context, "Priority Task Created Successfully", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.navigation_home)
     }
@@ -312,9 +315,15 @@ class AddDailyTaskFragment : Fragment() {
                 )
                 subTaskList.add(subTask)
                 Toast.makeText(context, "Subtask added successfully!", Toast.LENGTH_SHORT).show()
+                viewModelSubTask.getAllSubTaskFromPriorityTask(idTask).observe(viewLifecycleOwner, {subTaskList->
+                    binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    binding.recyclerView.adapter = SubTaskAdapter(requireContext(), subTaskList)
+                })
+                binding.recyclerView.adapter?.notifyDataSetChanged()
             } else {
                 Toast.makeText(context, "Please fill the subtitle", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 
