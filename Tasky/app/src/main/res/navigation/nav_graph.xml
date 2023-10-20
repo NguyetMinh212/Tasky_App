@@ -38,7 +38,11 @@
         android:id="@+id/addDailyTaskFragment"
         android:name="com.example.tasky.screen.AddDailyTaskFragment"
         android:label="fragment_add_daily_task"
-        tools:layout="@layout/fragment_add_daily_task" />
+        tools:layout="@layout/fragment_add_daily_task" >
+        <action
+            android:id="@+id/action_addDailyTaskFragment_to_updateSubTaskFragment"
+            app:destination="@id/updateSubTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailDailyTaskFragment"
         android:name="com.example.tasky.screen.DetailDailyTaskFragment"
@@ -70,6 +74,30 @@
         android:name="com.example.tasky.screen.DetailPriorityTaskFragment"
         android:label="fragment_detail_priority_task"
         tools:layout="@layout/fragment_detail_priority_task" >
+        <argument
+            android:name="data"
+            app:argType="com.example.tasky.model.PriorityTask" />
+        <action
+            android:id="@+id/action_detailPriorityTaskFragment_to_updateSubTaskFragment"
+            app:destination="@id/updateSubTaskFragment" />
+        <action
+            android:id="@+id/action_detailPriorityTaskFragment_to_updatePriorityTaskFragment"
+            app:destination="@id/updatePriorityTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateSubTaskFragment"
+        android:name="com.example.tasky.screen.UpdateSubTaskFragment"
+        android:label="fragment_update_sub_task"
+        tools:layout="@layout/fragment_update_sub_task" >
+        <argument
+            android:name="data"
+            app:argType="com.example.tasky.model.SubTask" />
+    </fragment>
+    <fragment
+        android:id="@+id/updatePriorityTaskFragment"
+        android:name="com.example.tasky.screen.UpdatePriorityTaskFragment"
+        android:label="fragment_update_priority_task"
+        tools:layout="@layout/fragment_update_priority_task" >
         <argument
             android:name="data"
             app:argType="com.example.tasky.model.PriorityTask" />

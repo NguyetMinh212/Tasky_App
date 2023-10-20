@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.R
 import com.example.tasky.adapter.SubTaskAdapter
 import com.example.tasky.databinding.FragmentAddDailyTaskBinding
@@ -36,6 +37,8 @@ class AddDailyTaskFragment : Fragment() {
     private val viewModel: DailyTaskViewModel by viewModels()
     private val viewModelPriority: PriorityTaskViewModel by viewModels()
     private val viewModelSubTask: SubTaskViewModel by viewModels()
+    private lateinit var adapter : SubTaskAdapter
+    private lateinit var subTaskRV : RecyclerView
 
     private var start_hour: Long = 0
     private var start_min: Long = 0
@@ -45,7 +48,38 @@ class AddDailyTaskFragment : Fragment() {
     private lateinit var startDate: Calendar
     private lateinit var endDate: Calendar
 
-    private val subTaskList = mutableListOf<SubTask>()
+    private val subTaskList = mutableListOf<SubTask>(
+        SubTask(
+            0,
+            "huongDx",
+            false,
+            0
+        ),
+        SubTask(
+            0,
+            "huongDx",
+            false,
+            0
+        ),
+        SubTask(
+            0,
+            "huongDx",
+            false,
+            0
+        ),
+        SubTask(
+            0,
+            "huongDx",
+            false,
+            0
+        ),
+        SubTask(
+            0,
+            "huongDx",
+            false,
+            0
+        )
+    )
     private var idTask = 0
 
     override fun onCreateView(
@@ -70,6 +104,7 @@ class AddDailyTaskFragment : Fragment() {
                 }
             }
         }
+
         category = "1"
         binding.dailyTask.setBackgroundResource(R.drawable.btn_chosen_shape)
         binding.dailyTask.setTextColor(resources.getColor(R.color.white))
@@ -88,12 +123,25 @@ class AddDailyTaskFragment : Fragment() {
         }
         binding.priorityTask.setOnClickListener {
             category = "2"
+            adapter.notifyDataSetChanged()
             binding.priorityTask.setBackgroundResource(R.drawable.btn_chosen_shape)
             binding.priorityTask.setTextColor(resources.getColor(R.color.white))
             binding.dailyTask.setBackgroundResource(R.drawable.edt_txt_shape)
             binding.dailyTask.setTextColor(resources.getColor(R.color.blue))
             initForPriorityTask()
         }
+        setUpAdapter()
+
+    }
+
+    private fun setUpAdapter() {
+        subTaskRV = binding.recyclerView
+        adapter = SubTaskAdapter(requireContext(), subTaskList){ it, data ->
+            val action =
+                AddDailyTaskFragmentDirections.actionAddDailyTaskFragmentToUpdateSubTaskFragment(data)
+            findNavController().navigate(action)}
+        subTaskRV.layoutManager = LinearLayoutManager(requireContext())
+        subTaskRV.adapter = adapter
     }
 
 
@@ -315,11 +363,8 @@ class AddDailyTaskFragment : Fragment() {
                 )
                 subTaskList.add(subTask)
                 Toast.makeText(context, "Subtask added successfully!", Toast.LENGTH_SHORT).show()
-                viewModelSubTask.getAllSubTaskFromPriorityTask(idTask).observe(viewLifecycleOwner, {subTaskList->
-                    binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                    binding.recyclerView.adapter = SubTaskAdapter(requireContext(), subTaskList)
-                })
-                binding.recyclerView.adapter?.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
+                binding.subtitletxt.text.clear()
             } else {
                 Toast.makeText(context, "Please fill the subtitle", Toast.LENGTH_SHORT).show()
             }

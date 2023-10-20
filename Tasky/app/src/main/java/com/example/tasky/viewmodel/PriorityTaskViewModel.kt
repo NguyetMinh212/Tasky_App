@@ -9,6 +9,7 @@ import com.example.tasky.database.SubTaskDatabase
 import com.example.tasky.model.PriorityTask
 import com.example.tasky.model.SubTask
 import com.example.tasky.repository.PriorityTaskRepository
+import com.example.tasky.repository.SubTaskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,12 +17,14 @@ class PriorityTaskViewModel(application: Application): AndroidViewModel(applicat
     private val priorityTaskDao = PriorityTaskDatabase.getDatabase(application).priorityTaskDao()
     private val repository: PriorityTaskRepository
     private val subTaskDao = SubTaskDatabase.getDatabase(application).subTaskDao()
+    private val subTaskRepository: SubTaskRepository
 
     val getAllPriorityTasks : LiveData<List<PriorityTask>>
 
     init {
         repository = PriorityTaskRepository(priorityTaskDao)
         getAllPriorityTasks = repository.getAllPriorityTask()
+        subTaskRepository = SubTaskRepository(subTaskDao)
     }
 
     fun insert(priorityTask: PriorityTask){
@@ -33,10 +36,10 @@ class PriorityTaskViewModel(application: Application): AndroidViewModel(applicat
 
     fun savePriorityTask(priorityTask: PriorityTask, listSubTask: List<SubTask>){
         viewModelScope.launch(Dispatchers.IO) {
-            val idTask = priorityTaskDao.insert(priorityTask)
+            val idTask = repository.insert(priorityTask)
             for (subTask in listSubTask){
                 subTask.idTask = idTask.toInt()
-                subTaskDao.insert(subTask)
+                subTaskRepository.insert(subTask)
             }
         }
     }

@@ -18,4 +18,5 @@
     <string name="unfinished">Unfinished</string>
     <string name="to_do_list">To do List</string>
     <string name="subtitle">Subtitle</string>
+    <string name="edit_subtask">Edit Subtask</string>
 </resources>
