@@ -101,5 +101,8 @@
         <argument
             android:name="data"
             app:argType="com.example.tasky.model.PriorityTask" />
+        <action
+            android:id="@+id/action_updatePriorityTaskFragment_to_updateSubTaskFragment"
+            app:destination="@id/updateSubTaskFragment" />
     </fragment>
 </navigation>

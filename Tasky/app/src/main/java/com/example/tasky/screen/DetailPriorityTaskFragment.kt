@@ -82,8 +82,8 @@ class DetailPriorityTaskFragment : Fragment() {
                     DetailPriorityTaskFragmentDirections.actionDetailPriorityTaskFragmentToUpdateSubTaskFragment(data)
                     Navigation.findNavController(it).navigate(action)
             }
-            subTaskRV.layoutManager = LinearLayoutManager(requireContext())
         })
+        subTaskRV.adapter?.notifyDataSetChanged()
         subTaskRV.layoutManager = LinearLayoutManager(requireContext())
 
     }
