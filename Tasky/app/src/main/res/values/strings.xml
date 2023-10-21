@@ -19,4 +19,11 @@
     <string name="to_do_list">To do List</string>
     <string name="subtitle">Subtitle</string>
     <string name="edit_subtask">Edit Subtask</string>
+    <string name="update_task">Update Task</string>
+    <string name="welcome_to_tasky">Welcome to Tasky!</string>
+    <string name="have_a_nice_day">Have a nice day!</string>
+    <string name="my_priority_task">My Priority Task</string>
+    <string name="my_daily_task">My Daily Task</string>
+    <string name="create_task">Create Task</string>
+    <string name="updating_soon">Updating soon...</string>
 </resources>

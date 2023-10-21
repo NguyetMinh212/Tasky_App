@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".screen.DetailDailyTaskFragment"
     android:paddingTop="16dp"
-    android:paddingHorizontal="20dp"
+    android:paddingHorizontal="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <LinearLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/close_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/close_square"/>
 
         <TextView
@@ -39,7 +39,7 @@
         android:id="@+id/date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Date"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -65,7 +65,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/start"
@@ -84,10 +84,10 @@
         android:text="@string/end"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/start"
+        app:layout_constraintStart_toEndOf="@id/start_tv"
         app:layout_constraintTop_toBottomOf="@id/date"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/end"
@@ -108,7 +108,7 @@
         android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/start"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="20dp"/>
     <TextView
         android:id="@+id/note"
         android:layout_width="wrap_content"
@@ -125,27 +125,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/note"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/delete_shape"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/redblue_shape"
         android:text="@string/mark_as_finished"
         android:textSize="20sp"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:gravity="center"/>
-
-    <TextView
-        android:id="@+id/delete_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/finished_btn"
-        app:layout_constraintTop_toBottomOf="@id/finished_btn"
-        app:layout_constraintEnd_toEndOf="@+id/finished_btn"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/delete_shape"
-        android:text="@string/delete_task"
-        android:textSize="20sp"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:textAlignment="center"
         android:gravity="center"/>
@@ -155,13 +139,29 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/finished_btn"
-        app:layout_constraintTop_toBottomOf="@id/delete_btn"
+        app:layout_constraintTop_toBottomOf="@id/finished_btn"
+        app:layout_constraintEnd_toEndOf="@+id/finished_btn"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/redblue_shape"
+        android:text="@string/edit_task"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/delete_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/finished_btn"
+        app:layout_constraintTop_toBottomOf="@id/edit_btn"
         app:layout_constraintEnd_toEndOf="@+id/finished_btn"
         android:layout_marginTop="16dp"
         android:background="@drawable/delete_shape"
-        android:text="@string/edit_task"
+        android:text="@string/delete_task"
         android:textSize="20sp"
-        android:textColor="@color/blue"
+        android:textColor="@color/red"
         android:textStyle="bold"
         android:textAlignment="center"
         android:gravity="center"

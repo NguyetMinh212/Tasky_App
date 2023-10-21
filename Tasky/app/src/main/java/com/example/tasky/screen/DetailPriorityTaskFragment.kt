@@ -1,5 +1,6 @@
 package com.example.tasky.screen
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -72,16 +73,26 @@ class DetailPriorityTaskFragment : Fragment() {
                 bottomSheet.dismiss()
             }
         }
+
+        binding.closeBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun setUpAdapter() {
         subTaskRV = binding.recyclerView
         viewModelSubTask.getAllSubTaskFromPriorityTask(priorityTask.data.idTask).observe(viewLifecycleOwner, { subTaskList ->
-            subTaskRV.adapter = SubTaskAdapter(requireContext(), subTaskList) { it, data ->
+
+            subTaskRV.layoutManager = LinearLayoutManager(requireContext())
+            subTaskRV.adapter = SubTaskAdapter(requireContext(), subTaskList, { it, data ->
                 val action =
                     DetailPriorityTaskFragmentDirections.actionDetailPriorityTaskFragmentToUpdateSubTaskFragment(data)
                     Navigation.findNavController(it).navigate(action)
+            }) { it, data ->
+                viewModelSubTask.update(data)
             }
+
         })
         subTaskRV.adapter?.notifyDataSetChanged()
         subTaskRV.layoutManager = LinearLayoutManager(requireContext())

@@ -5,4 +5,6 @@
     <color name="blue">#006EE9</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="pink">#D3A4A4</color>
+    <color name="red">#CD2C2C</color>
+    <color name="low_blue">#687EFF</color>
 </resources>

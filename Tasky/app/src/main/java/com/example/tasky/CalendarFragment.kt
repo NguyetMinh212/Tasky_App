@@ -62,11 +62,12 @@ class CalendarFragment : Fragment() {
     private fun showRecyclerView(searchQuery:String){
         viewModel.calendarSearch("%$searchQuery%").observe(viewLifecycleOwner,{dailyTaskList->
             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            binding.recyclerView.adapter = DailyTaskAdapter(requireContext(), dailyTaskList){
+            binding.recyclerView.adapter = DailyTaskAdapter(requireContext(), dailyTaskList,{
                     it, data ->
                 val action = CalendarFragmentDirections.actionNavigationCalendarToDetailDailyTaskFragment(data)
                 Navigation.findNavController(it).navigate(action)
-            }
+            }){ it, data ->
+                viewModel.update(data)}
         })
     }
 

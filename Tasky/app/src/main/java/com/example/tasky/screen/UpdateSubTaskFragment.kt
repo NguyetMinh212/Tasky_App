@@ -59,6 +59,9 @@ class UpdateSubTaskFragment : Fragment() {
                 bottomSheet.dismiss()
             }
         }
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
     }
 

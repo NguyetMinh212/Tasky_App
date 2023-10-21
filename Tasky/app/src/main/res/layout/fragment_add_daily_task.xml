@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screen.AddDailyTaskFragment"
     android:paddingTop="16dp"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="16dp">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -18,6 +18,7 @@
         app:layout_constraintBottom_toTopOf="@+id/scroll_view">
 
         <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@drawable/back_shape"
@@ -56,7 +57,7 @@
                 android:textColor="@color/blue"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 />
 
             <EditText
@@ -66,9 +67,9 @@
                 android:background="@drawable/edt_txt_shape"
                 app:layout_constraintTop_toBottomOf="@id/title_tv"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:textColorHint="@color/white"
-                android:padding="10dp"/>
+                android:padding="12dp"/>
 
             <TextView
                 android:id="@+id/description_tv"
@@ -79,7 +80,7 @@
                 android:text="@string/description"
                 android:textSize="20sp"
                 android:textColor="@color/blue"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:textStyle="bold"
                 />
 
@@ -90,9 +91,9 @@
                 android:background="@drawable/edt_txt_shape"
                 app:layout_constraintTop_toBottomOf="@id/description_tv"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:textColorHint="@color/black"
-                android:padding="8dp"/>
+                android:padding="12dp"/>
 
             <TextView
                 android:id="@+id/category_tv"
@@ -103,7 +104,7 @@
                 android:text="Category"
                 android:textSize="20sp"
                 android:textColor="@color/blue"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:textStyle="bold"
                 />
 
@@ -121,7 +122,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/priority_task"
                 app:layout_constraintTop_toBottomOf="@+id/category_tv"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="4dp"/>
 
 
             <TextView
@@ -129,7 +130,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/edt_txt_shape"
                 android:gravity="center"
                 android:text="@string/priority_task"
@@ -150,7 +151,7 @@
                 android:text="@string/start"
                 android:textSize="20sp"
                 android:textColor="@color/blue"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:textStyle="bold"
                 />
 
@@ -160,14 +161,15 @@
                 android:layout_height="50dp"
                 android:background="@drawable/edt_txt_shape"
                 android:text="00:00"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:gravity="center"
+                android:padding="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/end"
                 app:layout_constraintTop_toBottomOf="@id/timeStart"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="4dp"/>
 
             <TextView
                 android:id="@+id/timeEnd"
@@ -178,7 +180,7 @@
                 android:text="@string/end"
                 android:textSize="20sp"
                 android:textColor="@color/blue"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:textStyle="bold"
                 />
 
@@ -188,7 +190,8 @@
                 android:layout_height="50dp"
                 android:background="@drawable/edt_txt_shape"
                 android:text="00:00"
-                android:textSize="20sp"
+                android:padding="8dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:gravity="center"
@@ -196,7 +199,7 @@
                 app:layout_constraintTop_toBottomOf="@id/timeEnd"
                 app:layout_constraintStart_toEndOf="@+id/start"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="4dp"/>
 
             <TextView
                 android:id="@+id/todo_list"
@@ -207,7 +210,7 @@
                 android:text="@string/to_do_list"
                 android:textSize="20sp"
                 android:textColor="@color/blue"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:textStyle="bold"
                 />
 
@@ -240,6 +243,24 @@
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+            <TextView
+                android:id="@+id/save_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/redblue_shape"
+                android:gravity="center"
+                android:text="@string/create_task"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/add_subtask"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
@@ -247,17 +268,6 @@
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/baseline_check_24"
-        android:visibility="visible"
-        android:clickable="true"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

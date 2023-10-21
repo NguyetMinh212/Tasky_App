@@ -50,6 +50,10 @@ class DetailDailyTaskFragment : Fragment() {
             binding.finishedBtn.text = getString(R.string.mark_as_finished)
         }
 
+        binding.closeBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
         binding.deleteBtn.setOnClickListener {
             val bottomSheet: BottomSheetDialog =

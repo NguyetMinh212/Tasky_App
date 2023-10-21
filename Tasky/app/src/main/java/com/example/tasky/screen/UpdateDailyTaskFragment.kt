@@ -71,6 +71,10 @@ class UpdateDailyTaskFragment : Fragment() {
         end_hour = timeEnd.hours.toLong()
         end_min = timeEnd.minutes.toLong()
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.start.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)

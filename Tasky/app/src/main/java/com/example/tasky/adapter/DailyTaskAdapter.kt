@@ -8,10 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.databinding.DailyRowBinding
 import com.example.tasky.model.DailyTask
 
-class DailyTaskAdapter(val requireContext: Context, val dailyTaskList: List<DailyTask>, val onItemClick: (view: View, data: DailyTask) -> Unit) :
+class DailyTaskAdapter(
+    val requireContext: Context,
+    val dailyTaskList: List<DailyTask>,
+    val onItemClick: (view: View, data: DailyTask) -> Unit,
+    val onItemClick2: (view: View, data: DailyTask) -> Unit
+) :
     RecyclerView.Adapter<DailyTaskAdapter.dailyViewHolder>() {
 
-    inner class dailyViewHolder(val binding: DailyRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class dailyViewHolder(val binding: DailyRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
     }
 
@@ -20,7 +26,9 @@ class DailyTaskAdapter(val requireContext: Context, val dailyTaskList: List<Dail
             DailyRowBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false))
+                false
+            )
+        )
     }
 
     override fun getItemCount() = dailyTaskList.size
@@ -30,23 +38,24 @@ class DailyTaskAdapter(val requireContext: Context, val dailyTaskList: List<Dail
         holder.binding.txtNote.text = data.note
         holder.binding.txtTitle.text = data.title
         holder.binding.txtDate.text = data.date
-        if(data.ischecked){
+        if (data.ischecked) {
             holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_selected)
-        } else{
+        } else {
             holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_unselected)
         }
 
         holder.binding.checkbox.setOnClickListener {
-            if(data.ischecked){
+            if (data.ischecked) {
                 data.ischecked = false
                 holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_unselected)
-            } else{
+            } else {
                 data.ischecked = true
                 holder.binding.checkbox.setBackgroundResource(com.example.tasky.R.drawable.checkbox_selected)
             }
+            onItemClick2(it, data)
         }
 
-        holder.binding.root.setOnClickListener{
+        holder.binding.root.setOnClickListener {
 //            val action = HomeFragmentDirections.actionNavigationHomeToDetailDailyTaskFragment(data)
 //           Navigation.findNavController(it).navigate(action)
             onItemClick(it, data)

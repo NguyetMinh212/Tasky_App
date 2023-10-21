@@ -141,6 +141,10 @@ class UpdatePriorityTaskFragment : Fragment() {
 
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.btnSave.setOnClickListener {
             updatePriorityTask(it)
         }
@@ -188,10 +192,12 @@ class UpdatePriorityTaskFragment : Fragment() {
     private fun setUpAdapter() {
         subTaskRV = binding.recyclerView
         viewModelSubTask.getAllSubTaskFromPriorityTask(priorityTask.data.idTask).observe(viewLifecycleOwner, { subTaskList ->
-            subTaskRV.adapter = SubTaskAdapter(requireContext(), subTaskList) { it, data ->
+            subTaskRV.adapter = SubTaskAdapter(requireContext(), subTaskList,{ it, data ->
                 val action =
                     UpdatePriorityTaskFragmentDirections.actionUpdatePriorityTaskFragmentToUpdateSubTaskFragment(data)
                 Navigation.findNavController(it).navigate(action)
+            }) { it, data ->
+                viewModelSubTask.update(data)
             }
         })
         subTaskRV.layoutManager = LinearLayoutManager(requireContext())

@@ -48,38 +48,9 @@ class AddDailyTaskFragment : Fragment() {
     private lateinit var startDate: Calendar
     private lateinit var endDate: Calendar
 
-    private val subTaskList = mutableListOf<SubTask>(
-        SubTask(
-            0,
-            "huongDx",
-            false,
-            0
-        ),
-        SubTask(
-            0,
-            "huongDx",
-            false,
-            0
-        ),
-        SubTask(
-            0,
-            "huongDx",
-            false,
-            0
-        ),
-        SubTask(
-            0,
-            "huongDx",
-            false,
-            0
-        ),
-        SubTask(
-            0,
-            "huongDx",
-            false,
-            0
-        )
-    )
+    private val subTaskList = mutableListOf<SubTask>()
+
+
     private var idTask = 0
 
     override fun onCreateView(
@@ -93,7 +64,7 @@ class AddDailyTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnSave.setOnClickListener {
+        binding.saveBtn.setOnClickListener {
             if (category == "1") {
 
                     createDailyTask(it)
@@ -132,14 +103,18 @@ class AddDailyTaskFragment : Fragment() {
         }
         setUpAdapter()
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     private fun setUpAdapter() {
         subTaskRV = binding.recyclerView
-        adapter = SubTaskAdapter(requireContext(), subTaskList){ it, data ->
+        adapter = SubTaskAdapter(requireContext(), subTaskList,{ it, data ->
             val action =
                 AddDailyTaskFragmentDirections.actionAddDailyTaskFragmentToUpdateSubTaskFragment(data)
-            findNavController().navigate(action)}
+            findNavController().navigate(action)}){ it, data -> viewModelSubTask.update(data)}
         subTaskRV.layoutManager = LinearLayoutManager(requireContext())
         subTaskRV.adapter = adapter
     }
@@ -218,7 +193,6 @@ class AddDailyTaskFragment : Fragment() {
             timeEnd = timeEnd,
             dayCreated = timeCreate.toString()
         )
-        viewModelPriority.insert(priorityTask)
         viewModelPriority.savePriorityTask(priorityTask, subTaskList)
         Toast.makeText(context, "Priority Task Created Successfully", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.navigation_home)
@@ -229,6 +203,7 @@ class AddDailyTaskFragment : Fragment() {
         binding.todoList.visibility = View.GONE
         binding.recyclerView.visibility = View.GONE
         binding.addSubtask.visibility = View.GONE
+        binding.subtitletxt.visibility = View.GONE
 
         val cal = android.icu.util.Calendar.getInstance()
         val currentTime = cal.time
@@ -299,6 +274,7 @@ class AddDailyTaskFragment : Fragment() {
         binding.todoList.visibility = View.VISIBLE
         binding.recyclerView.visibility = View.VISIBLE
         binding.addSubtask.visibility = View.VISIBLE
+        binding.subtitletxt.visibility = View.VISIBLE
 
         startDate = Calendar.getInstance()
         endDate = Calendar.getInstance()

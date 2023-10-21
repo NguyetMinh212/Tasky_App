@@ -45,10 +45,12 @@ class HomeFragment : Fragment() {
             binding.recyclerView.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             binding.recyclerView.adapter =
-                DailyTaskAdapter(requireContext(), dailyTaskList) { it, data ->
+                DailyTaskAdapter(requireContext(), dailyTaskList, { it, data ->
                     val action =
                         HomeFragmentDirections.actionNavigationHomeToDetailDailyTaskFragment(data)
                     Navigation.findNavController(it).navigate(action)
+                }) { it, data ->
+                    viewModel.update(data)
                 }
 
 

@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".screen.DetailPriorityTaskFragment"
     android:paddingTop="16dp"
-    android:paddingHorizontal="20dp"
+    android:paddingHorizontal="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <LinearLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/close_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/close_square"/>
 
         <TextView
@@ -39,8 +39,8 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="-51dp">
+        app:layout_constraintTop_toBottomOf="@+id/bar"
+        android:layout_marginTop="45dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:id="@+id/date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:text="Date"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -71,7 +71,7 @@
                 android:id="@+id/start_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/start"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -92,13 +92,14 @@
                 android:id="@+id/end_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="160dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/end"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/start"
-                app:layout_constraintTop_toBottomOf="@id/date" />
+                app:layout_constraintTop_toBottomOf="@id/date"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"/>
 
             <TextView
                 android:id="@+id/end"
@@ -114,7 +115,7 @@
                 android:id="@+id/note_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/note"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -159,7 +160,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="48dp"
                 android:background="@drawable/redblue_shape"
                 android:gravity="center"
                 android:text="@string/edit_task"
@@ -177,17 +177,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="48dp"
-                android:background="@drawable/redblue_shape"
+                android:background="@drawable/delete_shape"
                 android:gravity="center"
                 android:text="@string/delete_task"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/red"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_btn" />
+                app:layout_constraintTop_toBottomOf="@id/edit_btn"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
